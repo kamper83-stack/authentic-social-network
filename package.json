@@ -1,0 +1,13 @@
+{
+  "name": "authentic-human-social-network",
+  "version": "1.0.0",
+  "private": true,
+  "description": "An AI-free social network for 100% human-created content",
+  "scripts": {
+    "start": "npm run start --prefix server",
+    "dev:server": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "test:server": "npm test --prefix server",
+    "build:client": "npm run build --prefix client"
+  }
+}

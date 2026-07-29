@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: authentic_server
+    restart: unless-stopped
+    ports:
+      - "5001:5001"
+    volumes:
+      - sqlite_data:/app
+    environment:
+      - NODE_ENV=production
+      - PORT=5001
+
+  client:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    container_name: authentic_client
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - server
+
+volumes:
+  sqlite_data:
+    driver: local

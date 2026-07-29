@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Upload, ShieldCheck, ShieldAlert, Sparkles, AlertCircle, Image as ImageIcon } from 'lucide-react';
+import { X, ShieldCheck, ShieldAlert, AlertCircle, Image as ImageIcon } from 'lucide-react';
 import { analyzeDraft, createPost } from '../utils/api';
 
 export default function CreatePostModal({ isOpen, onClose, onPostCreated }) {
@@ -90,10 +90,10 @@ export default function CreatePostModal({ isOpen, onClose, onPostCreated }) {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content glass-panel" onClick={(e) => e.stopPropagation()}>
         {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.2rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
           <div>
-            <h2 style={{ fontSize: '1.3rem', fontWeight: 700, color: '#fff' }}>Create Human Post</h2>
-            <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>Real-time zero-AI verification scanner active</p>
+            <h2 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#fff' }}>Create Human Post</h2>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>Real-time zero-AI verification scanner active</p>
           </div>
           <button className="btn btn-secondary" onClick={onClose} style={{ padding: '0.4rem', borderRadius: '50%' }}>
             <X size={18} />
@@ -101,17 +101,17 @@ export default function CreatePostModal({ isOpen, onClose, onPostCreated }) {
         </div>
 
         {/* Preset Helpers */}
-        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
-          <button className="btn btn-secondary" onClick={() => loadPreset('human')} style={{ fontSize: '0.78rem', padding: '0.3rem 0.6rem' }}>
+        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
+          <button type="button" className="btn btn-secondary" onClick={() => loadPreset('human')} style={{ fontSize: '0.76rem', padding: '0.35rem 0.6rem', flex: '1 1 auto' }}>
             ✨ Load Human Sample
           </button>
-          <button className="btn btn-secondary" onClick={() => loadPreset('ai')} style={{ fontSize: '0.78rem', padding: '0.3rem 0.6rem' }}>
+          <button type="button" className="btn btn-secondary" onClick={() => loadPreset('ai')} style={{ fontSize: '0.76rem', padding: '0.35rem 0.6rem', flex: '1 1 auto' }}>
             🤖 Test AI Sample Phrase
           </button>
         </div>
 
         {errorMsg && (
-          <div style={{ background: 'rgba(239, 68, 68, 0.15)', border: '1px solid var(--ruby-risk)', padding: '0.8rem', borderRadius: 'var(--radius-md)', color: '#fca5a5', fontSize: '0.85rem', marginBottom: '1rem', display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+          <div style={{ background: 'rgba(239, 68, 68, 0.15)', border: '1px solid var(--ruby-risk)', padding: '0.7rem', borderRadius: 'var(--radius-md)', color: '#fca5a5', fontSize: '0.82rem', marginBottom: '1rem', display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
             <AlertCircle size={16} /> {errorMsg}
           </div>
         )}
@@ -129,9 +129,9 @@ export default function CreatePostModal({ isOpen, onClose, onPostCreated }) {
           </div>
 
           {/* Media Upload / Preview */}
-          <div style={{ marginBottom: '1.2rem' }}>
+          <div style={{ marginBottom: '1rem' }}>
             {imagePreview ? (
-              <div style={{ position: 'relative', borderRadius: 'var(--radius-md)', overflow: 'hidden', maxHeight: '180px' }}>
+              <div style={{ position: 'relative', borderRadius: 'var(--radius-md)', overflow: 'hidden', maxHeight: '160px' }}>
                 <img src={imagePreview} alt="Upload preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 <button
                   type="button"
@@ -142,9 +142,9 @@ export default function CreatePostModal({ isOpen, onClose, onPostCreated }) {
                 </button>
               </div>
             ) : (
-              <label style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.7rem 1rem', background: 'rgba(255,255,255,0.03)', border: '1px dashed var(--border-color)', borderRadius: 'var(--radius-md)', cursor: 'pointer', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-                <ImageIcon size={18} color="var(--human-emerald)" />
-                <span>Attach authentic photo (scans EXIF camera metadata)</span>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 0.8rem', background: 'rgba(255,255,255,0.03)', border: '1px dashed var(--border-color)', borderRadius: 'var(--radius-md)', cursor: 'pointer', fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+                <ImageIcon size={17} color="var(--human-emerald)" />
+                <span>Attach authentic photo (scans EXIF metadata)</span>
                 <input type="file" accept="image/*" onChange={handleFileChange} style={{ display: 'none' }} />
               </label>
             )}
@@ -152,9 +152,9 @@ export default function CreatePostModal({ isOpen, onClose, onPostCreated }) {
 
           {/* Live AI Risk Inspector Widget */}
           {analysis && (
-            <div style={{ background: 'rgba(11, 15, 25, 0.7)', border: `1px solid ${analysis.aiProbability > 50 ? 'rgba(239, 68, 68, 0.4)' : 'rgba(16, 185, 129, 0.4)'}`, borderRadius: 'var(--radius-md)', padding: '1rem', marginBottom: '1.2rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem', fontWeight: 600 }}>
+            <div style={{ background: 'rgba(11, 15, 25, 0.7)', border: `1px solid ${analysis.aiProbability > 50 ? 'rgba(239, 68, 68, 0.4)' : 'rgba(16, 185, 129, 0.4)'}`, borderRadius: 'var(--radius-md)', padding: '0.8rem', marginBottom: '1rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem', flexWrap: 'wrap', gap: '0.4rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.82rem', fontWeight: 600 }}>
                   {analysis.aiProbability < 25 ? (
                     <ShieldCheck size={16} color="var(--human-emerald)" />
                   ) : (
@@ -162,25 +162,25 @@ export default function CreatePostModal({ isOpen, onClose, onPostCreated }) {
                   )}
                   <span>{analysis.statusLabel}</span>
                 </div>
-                <div style={{ fontSize: '0.8rem', fontWeight: 700, color: analysis.aiProbability > 50 ? 'var(--ruby-risk)' : 'var(--human-emerald)' }}>
+                <div style={{ fontSize: '0.78rem', fontWeight: 700, color: analysis.aiProbability > 50 ? 'var(--ruby-risk)' : 'var(--human-emerald)' }}>
                   {analysis.aiProbability}% AI Risk Score
                 </div>
               </div>
 
               {/* Progress Bar */}
-              <div style={{ width: '100%', height: '6px', background: 'rgba(255,255,255,0.1)', borderRadius: '3px', overflow: 'hidden', marginBottom: '0.6rem' }}>
+              <div style={{ width: '100%', height: '5px', background: 'rgba(255,255,255,0.1)', borderRadius: '3px', overflow: 'hidden', marginBottom: '0.5rem' }}>
                 <div style={{ width: `${analysis.aiProbability}%`, height: '100%', background: analysis.aiProbability > 50 ? 'var(--ruby-risk)' : 'var(--human-emerald)', transition: 'width 0.3s' }} />
               </div>
 
               {/* Flags list */}
               {analysis.flags.length > 0 ? (
-                <ul style={{ paddingLeft: '1.2rem', fontSize: '0.78rem', color: '#fca5a5' }}>
+                <ul style={{ paddingLeft: '1rem', fontSize: '0.76rem', color: '#fca5a5' }}>
                   {analysis.flags.map((flag, idx) => (
                     <li key={idx}>{flag}</li>
                   ))}
                 </ul>
               ) : (
-                <p style={{ fontSize: '0.78rem', color: 'var(--human-emerald)' }}>
+                <p style={{ fontSize: '0.76rem', color: 'var(--human-emerald)' }}>
                   ✓ Natural human sentence structure & clean metadata verified.
                 </p>
               )}
@@ -188,17 +188,17 @@ export default function CreatePostModal({ isOpen, onClose, onPostCreated }) {
           )}
 
           {/* Submit Actions */}
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.8rem' }}>
-            <button type="button" className="btn btn-secondary" onClick={onClose}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.6rem', flexWrap: 'wrap' }}>
+            <button type="button" className="btn btn-secondary" onClick={onClose} style={{ flex: '1 1 auto' }}>
               Cancel
             </button>
             <button
               type="submit"
               className="btn btn-primary"
               disabled={isSubmitting || (analysis && analysis.aiProbability > 80)}
-              style={{ opacity: (analysis && analysis.aiProbability > 80) ? 0.5 : 1 }}
+              style={{ opacity: (analysis && analysis.aiProbability > 80) ? 0.5 : 1, flex: '1 1 auto' }}
             >
-              {isSubmitting ? 'Verifying & Posting...' : 'Publish Human Post'}
+              {isSubmitting ? 'Verifying...' : 'Publish Human Post'}
             </button>
           </div>
         </form>
